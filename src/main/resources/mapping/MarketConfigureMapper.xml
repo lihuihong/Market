@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketConfigureMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketConfigure">
+    <id column="CONFIGURE_ID" jdbcType="INTEGER" property="configureId" />
+    <result column="VEHICLE_ID" jdbcType="INTEGER" property="vehicleId" />
+    <result column="CONFIGURE_PEDAL" jdbcType="VARCHAR" property="configurePedal" />
+    <result column="CONFIGURE_SEAT" jdbcType="VARCHAR" property="configureSeat" />
+    <result column="CONFIGURE_PICK" jdbcType="VARCHAR" property="configurePick" />
+    <result column="CONFIGURE_MIRROR" jdbcType="VARCHAR" property="configureMirror" />
+    <result column="CONFIGURE_TYRE" jdbcType="VARCHAR" property="configureTyre" />
+    <result column="CONFIGURE_COMPASS" jdbcType="VARCHAR" property="configureCompass" />
+    <result column="CONFIGURE_HEADLAMPS" jdbcType="VARCHAR" property="configureHeadlamps" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONFIGURE_ID, VEHICLE_ID, CONFIGURE_PEDAL, CONFIGURE_SEAT, CONFIGURE_PICK, CONFIGURE_MIRROR, 
+    CONFIGURE_TYRE, CONFIGURE_COMPASS, CONFIGURE_HEADLAMPS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market_configure
+    where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_configure
+    where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketConfigure">
+    insert into market_configure (CONFIGURE_ID, VEHICLE_ID, CONFIGURE_PEDAL, 
+      CONFIGURE_SEAT, CONFIGURE_PICK, CONFIGURE_MIRROR, 
+      CONFIGURE_TYRE, CONFIGURE_COMPASS, CONFIGURE_HEADLAMPS
+      )
+    values (#{configureId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, #{configurePedal,jdbcType=VARCHAR}, 
+      #{configureSeat,jdbcType=VARCHAR}, #{configurePick,jdbcType=VARCHAR}, #{configureMirror,jdbcType=VARCHAR}, 
+      #{configureTyre,jdbcType=VARCHAR}, #{configureCompass,jdbcType=VARCHAR}, #{configureHeadlamps,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketConfigure">
+    insert into market_configure
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configureId != null">
+        CONFIGURE_ID,
+      </if>
+      <if test="vehicleId != null">
+        VEHICLE_ID,
+      </if>
+      <if test="configurePedal != null">
+        CONFIGURE_PEDAL,
+      </if>
+      <if test="configureSeat != null">
+        CONFIGURE_SEAT,
+      </if>
+      <if test="configurePick != null">
+        CONFIGURE_PICK,
+      </if>
+      <if test="configureMirror != null">
+        CONFIGURE_MIRROR,
+      </if>
+      <if test="configureTyre != null">
+        CONFIGURE_TYRE,
+      </if>
+      <if test="configureCompass != null">
+        CONFIGURE_COMPASS,
+      </if>
+      <if test="configureHeadlamps != null">
+        CONFIGURE_HEADLAMPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configureId != null">
+        #{configureId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="configurePedal != null">
+        #{configurePedal,jdbcType=VARCHAR},
+      </if>
+      <if test="configureSeat != null">
+        #{configureSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="configurePick != null">
+        #{configurePick,jdbcType=VARCHAR},
+      </if>
+      <if test="configureMirror != null">
+        #{configureMirror,jdbcType=VARCHAR},
+      </if>
+      <if test="configureTyre != null">
+        #{configureTyre,jdbcType=VARCHAR},
+      </if>
+      <if test="configureCompass != null">
+        #{configureCompass,jdbcType=VARCHAR},
+      </if>
+      <if test="configureHeadlamps != null">
+        #{configureHeadlamps,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketConfigure">
+    update market_configure
+    <set>
+      <if test="vehicleId != null">
+        VEHICLE_ID = #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="configurePedal != null">
+        CONFIGURE_PEDAL = #{configurePedal,jdbcType=VARCHAR},
+      </if>
+      <if test="configureSeat != null">
+        CONFIGURE_SEAT = #{configureSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="configurePick != null">
+        CONFIGURE_PICK = #{configurePick,jdbcType=VARCHAR},
+      </if>
+      <if test="configureMirror != null">
+        CONFIGURE_MIRROR = #{configureMirror,jdbcType=VARCHAR},
+      </if>
+      <if test="configureTyre != null">
+        CONFIGURE_TYRE = #{configureTyre,jdbcType=VARCHAR},
+      </if>
+      <if test="configureCompass != null">
+        CONFIGURE_COMPASS = #{configureCompass,jdbcType=VARCHAR},
+      </if>
+      <if test="configureHeadlamps != null">
+        CONFIGURE_HEADLAMPS = #{configureHeadlamps,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketConfigure">
+    update market_configure
+    set VEHICLE_ID = #{vehicleId,jdbcType=INTEGER},
+      CONFIGURE_PEDAL = #{configurePedal,jdbcType=VARCHAR},
+      CONFIGURE_SEAT = #{configureSeat,jdbcType=VARCHAR},
+      CONFIGURE_PICK = #{configurePick,jdbcType=VARCHAR},
+      CONFIGURE_MIRROR = #{configureMirror,jdbcType=VARCHAR},
+      CONFIGURE_TYRE = #{configureTyre,jdbcType=VARCHAR},
+      CONFIGURE_COMPASS = #{configureCompass,jdbcType=VARCHAR},
+      CONFIGURE_HEADLAMPS = #{configureHeadlamps,jdbcType=VARCHAR}
+    where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}
+  </update>
+</mapper>

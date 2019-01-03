@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketProductionMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketProduction">
+    <id column="PRODUCTION_ID" jdbcType="INTEGER" property="productionId" />
+    <result column="VEHICLE_ID" jdbcType="INTEGER" property="vehicleId" />
+    <result column="PRODUCTION_NUMBER" jdbcType="VARCHAR" property="productionNumber" />
+    <result column="PRODUCTION_VOLUME" jdbcType="VARCHAR" property="productionVolume" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRODUCTION_ID, VEHICLE_ID, PRODUCTION_NUMBER, PRODUCTION_VOLUME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market_production
+    where PRODUCTION_ID = #{productionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_production
+    where PRODUCTION_ID = #{productionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketProduction">
+    insert into market_production (PRODUCTION_ID, VEHICLE_ID, PRODUCTION_NUMBER, 
+      PRODUCTION_VOLUME)
+    values (#{productionId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, #{productionNumber,jdbcType=VARCHAR}, 
+      #{productionVolume,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketProduction">
+    insert into market_production
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productionId != null">
+        PRODUCTION_ID,
+      </if>
+      <if test="vehicleId != null">
+        VEHICLE_ID,
+      </if>
+      <if test="productionNumber != null">
+        PRODUCTION_NUMBER,
+      </if>
+      <if test="productionVolume != null">
+        PRODUCTION_VOLUME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productionId != null">
+        #{productionId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="productionNumber != null">
+        #{productionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productionVolume != null">
+        #{productionVolume,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketProduction">
+    update market_production
+    <set>
+      <if test="vehicleId != null">
+        VEHICLE_ID = #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="productionNumber != null">
+        PRODUCTION_NUMBER = #{productionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productionVolume != null">
+        PRODUCTION_VOLUME = #{productionVolume,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PRODUCTION_ID = #{productionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketProduction">
+    update market_production
+    set VEHICLE_ID = #{vehicleId,jdbcType=INTEGER},
+      PRODUCTION_NUMBER = #{productionNumber,jdbcType=VARCHAR},
+      PRODUCTION_VOLUME = #{productionVolume,jdbcType=VARCHAR}
+    where PRODUCTION_ID = #{productionId,jdbcType=INTEGER}
+  </update>
+</mapper>

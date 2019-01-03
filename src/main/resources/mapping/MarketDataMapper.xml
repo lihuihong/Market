@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketDataMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketData">
+    <id column="DATA_ID" jdbcType="INTEGER" property="dataId" />
+    <result column="VEHICLE_ID" jdbcType="INTEGER" property="vehicleId" />
+    <result column="DATA_ENGINE" jdbcType="VARCHAR" property="dataEngine" />
+    <result column="DATA_POWER" jdbcType="VARCHAR" property="dataPower" />
+    <result column="DATA_TORQUE" jdbcType="VARCHAR" property="dataTorque" />
+    <result column="DATA_CASE" jdbcType="VARCHAR" property="dataCase" />
+    <result column="DATA_SPEED" jdbcType="VARCHAR" property="dataSpeed" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DATA_ID, VEHICLE_ID, DATA_ENGINE, DATA_POWER, DATA_TORQUE, DATA_CASE, DATA_SPEED
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market_data
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_data
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketData">
+    insert into market_data (DATA_ID, VEHICLE_ID, DATA_ENGINE, 
+      DATA_POWER, DATA_TORQUE, DATA_CASE, 
+      DATA_SPEED)
+    values (#{dataId,jdbcType=INTEGER}, #{vehicleId,jdbcType=INTEGER}, #{dataEngine,jdbcType=VARCHAR}, 
+      #{dataPower,jdbcType=VARCHAR}, #{dataTorque,jdbcType=VARCHAR}, #{dataCase,jdbcType=VARCHAR}, 
+      #{dataSpeed,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketData">
+    insert into market_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dataId != null">
+        DATA_ID,
+      </if>
+      <if test="vehicleId != null">
+        VEHICLE_ID,
+      </if>
+      <if test="dataEngine != null">
+        DATA_ENGINE,
+      </if>
+      <if test="dataPower != null">
+        DATA_POWER,
+      </if>
+      <if test="dataTorque != null">
+        DATA_TORQUE,
+      </if>
+      <if test="dataCase != null">
+        DATA_CASE,
+      </if>
+      <if test="dataSpeed != null">
+        DATA_SPEED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dataId != null">
+        #{dataId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="dataEngine != null">
+        #{dataEngine,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPower != null">
+        #{dataPower,jdbcType=VARCHAR},
+      </if>
+      <if test="dataTorque != null">
+        #{dataTorque,jdbcType=VARCHAR},
+      </if>
+      <if test="dataCase != null">
+        #{dataCase,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSpeed != null">
+        #{dataSpeed,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketData">
+    update market_data
+    <set>
+      <if test="vehicleId != null">
+        VEHICLE_ID = #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="dataEngine != null">
+        DATA_ENGINE = #{dataEngine,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPower != null">
+        DATA_POWER = #{dataPower,jdbcType=VARCHAR},
+      </if>
+      <if test="dataTorque != null">
+        DATA_TORQUE = #{dataTorque,jdbcType=VARCHAR},
+      </if>
+      <if test="dataCase != null">
+        DATA_CASE = #{dataCase,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSpeed != null">
+        DATA_SPEED = #{dataSpeed,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketData">
+    update market_data
+    set VEHICLE_ID = #{vehicleId,jdbcType=INTEGER},
+      DATA_ENGINE = #{dataEngine,jdbcType=VARCHAR},
+      DATA_POWER = #{dataPower,jdbcType=VARCHAR},
+      DATA_TORQUE = #{dataTorque,jdbcType=VARCHAR},
+      DATA_CASE = #{dataCase,jdbcType=VARCHAR},
+      DATA_SPEED = #{dataSpeed,jdbcType=VARCHAR}
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </update>
+</mapper>

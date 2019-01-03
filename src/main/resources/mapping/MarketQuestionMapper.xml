@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketQuestion">
+    <id column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="QUESTION_NAME" jdbcType="VARCHAR" property="questionName" />
+    <result column="QUESTION_TYPE" jdbcType="VARCHAR" property="questionType" />
+    <result column="QUESTION_TIME" jdbcType="TIMESTAMP" property="questionTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    QUESTION_ID, USER_ID, QUESTION_NAME, QUESTION_TYPE, QUESTION_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market_question
+    where QUESTION_ID = #{questionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_question
+    where QUESTION_ID = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketQuestion">
+    insert into market_question (QUESTION_ID, USER_ID, QUESTION_NAME, 
+      QUESTION_TYPE, QUESTION_TIME)
+    values (#{questionId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{questionName,jdbcType=VARCHAR}, 
+      #{questionType,jdbcType=VARCHAR}, #{questionTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketQuestion">
+    insert into market_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        QUESTION_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="questionName != null">
+        QUESTION_NAME,
+      </if>
+      <if test="questionType != null">
+        QUESTION_TYPE,
+      </if>
+      <if test="questionTime != null">
+        QUESTION_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="questionName != null">
+        #{questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null">
+        #{questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null">
+        #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketQuestion">
+    update market_question
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="questionName != null">
+        QUESTION_NAME = #{questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null">
+        QUESTION_TYPE = #{questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null">
+        QUESTION_TIME = #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where QUESTION_ID = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketQuestion">
+    update market_question
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      QUESTION_NAME = #{questionName,jdbcType=VARCHAR},
+      QUESTION_TYPE = #{questionType,jdbcType=VARCHAR},
+      QUESTION_TIME = #{questionTime,jdbcType=TIMESTAMP}
+    where QUESTION_ID = #{questionId,jdbcType=INTEGER}
+  </update>
+</mapper>

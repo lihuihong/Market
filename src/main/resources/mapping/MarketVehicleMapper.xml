@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketVehicleMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketVehicle">
+    <id column="VEHICLE_ID" jdbcType="INTEGER" property="vehicleId" />
+    <result column="VEHICLE_NAME" jdbcType="VARCHAR" property="vehicleName" />
+    <result column="VEHICLE_TYPE" jdbcType="VARCHAR" property="vehicleType" />
+    <result column="VEHICLE_COLOR" jdbcType="VARCHAR" property="vehicleColor" />
+    <result column="VEHICLE_NUMBER" jdbcType="VARCHAR" property="vehicleNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    VEHICLE_ID, VEHICLE_NAME, VEHICLE_TYPE, VEHICLE_COLOR, VEHICLE_NUMBER
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market_vehicle
+    where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_vehicle
+    where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketVehicle">
+    insert into market_vehicle (VEHICLE_ID, VEHICLE_NAME, VEHICLE_TYPE, 
+      VEHICLE_COLOR, VEHICLE_NUMBER)
+    values (#{vehicleId,jdbcType=INTEGER}, #{vehicleName,jdbcType=VARCHAR}, #{vehicleType,jdbcType=VARCHAR}, 
+      #{vehicleColor,jdbcType=VARCHAR}, #{vehicleNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketVehicle">
+    insert into market_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vehicleId != null">
+        VEHICLE_ID,
+      </if>
+      <if test="vehicleName != null">
+        VEHICLE_NAME,
+      </if>
+      <if test="vehicleType != null">
+        VEHICLE_TYPE,
+      </if>
+      <if test="vehicleColor != null">
+        VEHICLE_COLOR,
+      </if>
+      <if test="vehicleNumber != null">
+        VEHICLE_NUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vehicleId != null">
+        #{vehicleId,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleName != null">
+        #{vehicleName,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null">
+        #{vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleColor != null">
+        #{vehicleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleNumber != null">
+        #{vehicleNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketVehicle">
+    update market_vehicle
+    <set>
+      <if test="vehicleName != null">
+        VEHICLE_NAME = #{vehicleName,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null">
+        VEHICLE_TYPE = #{vehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleColor != null">
+        VEHICLE_COLOR = #{vehicleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleNumber != null">
+        VEHICLE_NUMBER = #{vehicleNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketVehicle">
+    update market_vehicle
+    set VEHICLE_NAME = #{vehicleName,jdbcType=VARCHAR},
+      VEHICLE_TYPE = #{vehicleType,jdbcType=VARCHAR},
+      VEHICLE_COLOR = #{vehicleColor,jdbcType=VARCHAR},
+      VEHICLE_NUMBER = #{vehicleNumber,jdbcType=VARCHAR}
+    where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </update>
+</mapper>

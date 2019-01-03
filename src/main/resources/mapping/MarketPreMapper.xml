@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketPreMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketPre">
+    <id column="PRE_ID" jdbcType="INTEGER" property="preId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="PRE_NAME" jdbcType="VARCHAR" property="preName" />
+    <result column="PRE_TYPE" jdbcType="VARCHAR" property="preType" />
+    <result column="PRE_TIME" jdbcType="TIMESTAMP" property="preTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRE_ID, USER_ID, PRE_NAME, PRE_TYPE, PRE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market_pre
+    where PRE_ID = #{preId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_pre
+    where PRE_ID = #{preId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketPre">
+    insert into market_pre (PRE_ID, USER_ID, PRE_NAME, 
+      PRE_TYPE, PRE_TIME)
+    values (#{preId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{preName,jdbcType=VARCHAR}, 
+      #{preType,jdbcType=VARCHAR}, #{preTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketPre">
+    insert into market_pre
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="preId != null">
+        PRE_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="preName != null">
+        PRE_NAME,
+      </if>
+      <if test="preType != null">
+        PRE_TYPE,
+      </if>
+      <if test="preTime != null">
+        PRE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="preId != null">
+        #{preId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="preName != null">
+        #{preName,jdbcType=VARCHAR},
+      </if>
+      <if test="preType != null">
+        #{preType,jdbcType=VARCHAR},
+      </if>
+      <if test="preTime != null">
+        #{preTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketPre">
+    update market_pre
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="preName != null">
+        PRE_NAME = #{preName,jdbcType=VARCHAR},
+      </if>
+      <if test="preType != null">
+        PRE_TYPE = #{preType,jdbcType=VARCHAR},
+      </if>
+      <if test="preTime != null">
+        PRE_TIME = #{preTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PRE_ID = #{preId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketPre">
+    update market_pre
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      PRE_NAME = #{preName,jdbcType=VARCHAR},
+      PRE_TYPE = #{preType,jdbcType=VARCHAR},
+      PRE_TIME = #{preTime,jdbcType=TIMESTAMP}
+    where PRE_ID = #{preId,jdbcType=INTEGER}
+  </update>
+</mapper>
