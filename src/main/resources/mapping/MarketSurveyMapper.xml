@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.MarketSurveyMapper">
+  <resultMap id="BaseResultMap" type="com.market.entity.MarketSurvey">
+    <id column="SURVEY_ID" jdbcType="INTEGER" property="surveyId" />
+    <result column="SURVEY_NAME" jdbcType="VARCHAR" property="surveyName" />
+    <result column="SURVEY_DESC" jdbcType="VARCHAR" property="surveyDesc" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="SURVEY_TIME" jdbcType="TIMESTAMP" property="surveyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SURVEY_ID, SURVEY_NAME, SURVEY_DESC, USER_ID, SURVEY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="Integer"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_survey
+    where SURVEY_ID = #{surveyId,jdbcType=INTEGER}
+  </select>
+  <select id="selectList" parameterType="com.market.entity.MarketSurvey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_survey
+    <where>
+      <if test="surveyName!=null and surveyName != ''">
+        and SURVEY_NAME like CONCAT('%',#{surveyName},'%')
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from market_survey
+    where SURVEY_ID = #{surveyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.market.entity.MarketSurvey">
+    insert into market_survey (SURVEY_ID, SURVEY_NAME, SURVEY_DESC,
+      USER_ID, SURVEY_TIME)
+    values (#{surveyId,jdbcType=INTEGER}, #{surveyName,jdbcType=INTEGER}, #{surveyDesc,jdbcType=INTEGER},
+      #{userId,jdbcType=INTEGER}, #{surveyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.market.entity.MarketSurvey">
+    insert into market_survey
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="surveyId != null">
+        SURVEY_ID,
+      </if>
+      <if test="surveyName != null">
+        SURVEY_NAME,
+      </if>
+      <if test="surveyDesc != null">
+        SURVEY_DESC,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="surveyTime != null">
+        SURVEY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="surveyId != null">
+        #{surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="surveyName != null">
+        #{surveyName,jdbcType=INTEGER},
+      </if>
+      <if test="surveyDesc != null">
+        #{surveyDesc,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="surveyTime != null">
+        #{surveyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketSurvey">
+    update market_survey
+    <set>
+      <if test="surveyName != null">
+        SURVEY_NAME = #{surveyName,jdbcType=INTEGER},
+      </if>
+      <if test="surveyDesc != null">
+        SURVEY_DESC = #{surveyDesc,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="surveyTime != null">
+        SURVEY_TIME = #{surveyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SURVEY_ID = #{surveyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketSurvey">
+    update market_survey
+    set SURVEY_NAME = #{surveyName,jdbcType=INTEGER},
+      SURVEY_DESC = #{surveyDesc,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      SURVEY_TIME = #{surveyTime,jdbcType=TIMESTAMP}
+    where SURVEY_ID = #{surveyId,jdbcType=INTEGER}
+  </update>
+</mapper>

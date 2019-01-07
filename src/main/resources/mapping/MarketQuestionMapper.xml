@@ -3,13 +3,18 @@
 <mapper namespace="com.market.dao.MarketQuestionMapper">
   <resultMap id="BaseResultMap" type="com.market.entity.MarketQuestion">
     <id column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
-    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
-    <result column="QUESTION_NAME" jdbcType="VARCHAR" property="questionName" />
+    <result column="SURVEY_ID" jdbcType="INTEGER" property="surveyId" />
+    <result column="QUESTION_CONTENT" jdbcType="VARCHAR" property="questionContent" />
     <result column="QUESTION_TYPE" jdbcType="VARCHAR" property="questionType" />
+    <result column="QUESTION_A" jdbcType="VARCHAR" property="questionA" />
+    <result column="QUESTION_B" jdbcType="VARCHAR" property="questionB" />
+    <result column="QUESTION_C" jdbcType="VARCHAR" property="questionC" />
+    <result column="QUESTION_D" jdbcType="VARCHAR" property="questionD" />
     <result column="QUESTION_TIME" jdbcType="TIMESTAMP" property="questionTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    QUESTION_ID, USER_ID, QUESTION_NAME, QUESTION_TYPE, QUESTION_TIME
+    QUESTION_ID, SURVEY_ID, QUESTION_CONTENT, QUESTION_TYPE, QUESTION_A, QUESTION_B, 
+    QUESTION_C, QUESTION_D, QUESTION_TIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -17,15 +22,29 @@
     from market_question
     where QUESTION_ID = #{questionId,jdbcType=INTEGER}
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_question
+    <where>
+      <if test="surveyId != null and surveyId != ''">
+        and SURVEY_ID = #{surveyId}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from market_question
     where QUESTION_ID = #{questionId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.market.entity.MarketQuestion">
-    insert into market_question (QUESTION_ID, USER_ID, QUESTION_NAME, 
-      QUESTION_TYPE, QUESTION_TIME)
-    values (#{questionId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{questionName,jdbcType=VARCHAR}, 
-      #{questionType,jdbcType=VARCHAR}, #{questionTime,jdbcType=TIMESTAMP})
+    insert into market_question (QUESTION_ID, SURVEY_ID, QUESTION_CONTENT, 
+      QUESTION_TYPE, QUESTION_A, QUESTION_B, 
+      QUESTION_C, QUESTION_D, QUESTION_TIME
+      )
+    values (#{questionId,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{questionContent,jdbcType=VARCHAR}, 
+      #{questionType,jdbcType=VARCHAR}, #{questionA,jdbcType=VARCHAR}, #{questionB,jdbcType=VARCHAR}, 
+      #{questionC,jdbcType=VARCHAR}, #{questionD,jdbcType=VARCHAR}, #{questionTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.market.entity.MarketQuestion">
     insert into market_question
@@ -33,14 +52,26 @@
       <if test="questionId != null">
         QUESTION_ID,
       </if>
-      <if test="userId != null">
-        USER_ID,
+      <if test="surveyId != null">
+        SURVEY_ID,
       </if>
-      <if test="questionName != null">
-        QUESTION_NAME,
+      <if test="questionContent != null">
+        QUESTION_CONTENT,
       </if>
       <if test="questionType != null">
         QUESTION_TYPE,
+      </if>
+      <if test="questionA != null">
+        QUESTION_A,
+      </if>
+      <if test="questionB != null">
+        QUESTION_B,
+      </if>
+      <if test="questionC != null">
+        QUESTION_C,
+      </if>
+      <if test="questionD != null">
+        QUESTION_D,
       </if>
       <if test="questionTime != null">
         QUESTION_TIME,
@@ -50,14 +81,26 @@
       <if test="questionId != null">
         #{questionId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+      <if test="surveyId != null">
+        #{surveyId,jdbcType=INTEGER},
       </if>
-      <if test="questionName != null">
-        #{questionName,jdbcType=VARCHAR},
+      <if test="questionContent != null">
+        #{questionContent,jdbcType=VARCHAR},
       </if>
       <if test="questionType != null">
         #{questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="questionA != null">
+        #{questionA,jdbcType=VARCHAR},
+      </if>
+      <if test="questionB != null">
+        #{questionB,jdbcType=VARCHAR},
+      </if>
+      <if test="questionC != null">
+        #{questionC,jdbcType=VARCHAR},
+      </if>
+      <if test="questionD != null">
+        #{questionD,jdbcType=VARCHAR},
       </if>
       <if test="questionTime != null">
         #{questionTime,jdbcType=TIMESTAMP},
@@ -67,14 +110,26 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.market.entity.MarketQuestion">
     update market_question
     <set>
-      <if test="userId != null">
-        USER_ID = #{userId,jdbcType=INTEGER},
+      <if test="surveyId != null">
+        SURVEY_ID = #{surveyId,jdbcType=INTEGER},
       </if>
-      <if test="questionName != null">
-        QUESTION_NAME = #{questionName,jdbcType=VARCHAR},
+      <if test="questionContent != null">
+        QUESTION_CONTENT = #{questionContent,jdbcType=VARCHAR},
       </if>
       <if test="questionType != null">
         QUESTION_TYPE = #{questionType,jdbcType=VARCHAR},
+      </if>
+      <if test="questionA != null">
+        QUESTION_A = #{questionA,jdbcType=VARCHAR},
+      </if>
+      <if test="questionB != null">
+        QUESTION_B = #{questionB,jdbcType=VARCHAR},
+      </if>
+      <if test="questionC != null">
+        QUESTION_C = #{questionC,jdbcType=VARCHAR},
+      </if>
+      <if test="questionD != null">
+        QUESTION_D = #{questionD,jdbcType=VARCHAR},
       </if>
       <if test="questionTime != null">
         QUESTION_TIME = #{questionTime,jdbcType=TIMESTAMP},
@@ -84,9 +139,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.market.entity.MarketQuestion">
     update market_question
-    set USER_ID = #{userId,jdbcType=INTEGER},
-      QUESTION_NAME = #{questionName,jdbcType=VARCHAR},
+    set SURVEY_ID = #{surveyId,jdbcType=INTEGER},
+      QUESTION_CONTENT = #{questionContent,jdbcType=VARCHAR},
       QUESTION_TYPE = #{questionType,jdbcType=VARCHAR},
+      QUESTION_A = #{questionA,jdbcType=VARCHAR},
+      QUESTION_B = #{questionB,jdbcType=VARCHAR},
+      QUESTION_C = #{questionC,jdbcType=VARCHAR},
+      QUESTION_D = #{questionD,jdbcType=VARCHAR},
       QUESTION_TIME = #{questionTime,jdbcType=TIMESTAMP}
     where QUESTION_ID = #{questionId,jdbcType=INTEGER}
   </update>

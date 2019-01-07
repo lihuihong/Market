@@ -53,22 +53,26 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/login.json",method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public Result login(HttpServletRequest request) throws Exception {
-        Map<String, Object> info = marketUserService.selectUser(request);
-        return Result.success().add("info", info);
+       /* Map<String, Object> info = marketUserService.selectUser(request);*/
+        Result result = new Result();
+
+        result.setSuccess("成功");
+
+        return result;
     }
-    /**
+   /* *//**
      * 用户注册
      * @throws Exception
-     */
+     *//*
     @RequestMapping(value = "/register.json",method = RequestMethod.POST)
     @ResponseBody
     public Result show_register(HttpServletRequest request) throws Exception {
         Map<String, Object> info = marketUserService.regist(request);
-        return Result.success().add("info", info);
-    }
+        return new Result();
+    }*/
 
 
 }

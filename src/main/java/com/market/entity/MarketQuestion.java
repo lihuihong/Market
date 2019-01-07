@@ -4,13 +4,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class MarketQuestion implements Serializable {
+
     private Integer questionId;
 
-    private Integer userId;
+    private Integer surveyId;
 
-    private String questionName;
+    private String questionContent;
 
     private String questionType;
+
+    private String questionA;
+
+    private String questionB;
+
+    private String questionC;
+
+    private String questionD;
 
     private Date questionTime;
 
@@ -24,20 +33,20 @@ public class MarketQuestion implements Serializable {
         this.questionId = questionId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getSurveyId() {
+        return surveyId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 
-    public String getQuestionName() {
-        return questionName;
+    public String getQuestionContent() {
+        return questionContent;
     }
 
-    public void setQuestionName(String questionName) {
-        this.questionName = questionName == null ? null : questionName.trim();
+    public void setQuestionContent(String questionContent) {
+        this.questionContent = questionContent == null ? null : questionContent.trim();
     }
 
     public String getQuestionType() {
@@ -46,6 +55,38 @@ public class MarketQuestion implements Serializable {
 
     public void setQuestionType(String questionType) {
         this.questionType = questionType == null ? null : questionType.trim();
+    }
+
+    public String getQuestionA() {
+        return questionA;
+    }
+
+    public void setQuestionA(String questionA) {
+        this.questionA = questionA == null ? null : questionA.trim();
+    }
+
+    public String getQuestionB() {
+        return questionB;
+    }
+
+    public void setQuestionB(String questionB) {
+        this.questionB = questionB == null ? null : questionB.trim();
+    }
+
+    public String getQuestionC() {
+        return questionC;
+    }
+
+    public void setQuestionC(String questionC) {
+        this.questionC = questionC == null ? null : questionC.trim();
+    }
+
+    public String getQuestionD() {
+        return questionD;
+    }
+
+    public void setQuestionD(String questionD) {
+        this.questionD = questionD == null ? null : questionD.trim();
     }
 
     public Date getQuestionTime() {
@@ -63,9 +104,13 @@ public class MarketQuestion implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", questionId=").append(questionId);
-        sb.append(", userId=").append(userId);
-        sb.append(", questionName=").append(questionName);
+        sb.append(", surveyId=").append(surveyId);
+        sb.append(", questionContent=").append(questionContent);
         sb.append(", questionType=").append(questionType);
+        sb.append(", questionA=").append(questionA);
+        sb.append(", questionB=").append(questionB);
+        sb.append(", questionC=").append(questionC);
+        sb.append(", questionD=").append(questionD);
         sb.append(", questionTime=").append(questionTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

@@ -18,8 +18,9 @@ import java.util.Map;
 
 @Service("MarketUserService")
 public class MarketUserService {
-    @Autowired
-    private MarketUserMapper marketUserMapper;
+
+    /*@Autowired
+    private MarketUserMapper marketUserMapper;*/
 
     /**
      * 用户登录
@@ -28,7 +29,7 @@ public class MarketUserService {
      * @return
      * @throws LException
      */
-    public Map<String, Object> selectUser(HttpServletRequest request) throws LException {
+   /* public Map<String, Object> selectUser(HttpServletRequest request) throws LException {
         //获取登录参数
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -51,7 +52,7 @@ public class MarketUserService {
         Map<String, Object> info = new HashMap<String, Object>();
         info.put("userToken", userToken);
         return info;
-    }
+    }*/
 
     /**
      * 校验用户登录
@@ -60,9 +61,9 @@ public class MarketUserService {
      * @param password 登录密码
      * @return
      */
-    public MarketUser selectUser(String username, String password) {
+   /* public MarketUser selectUser(String username, String password) {
         return marketUserMapper.checkUser(username, password);
-    }
+    }*/
 
     /**
      * 用户注册
@@ -70,7 +71,7 @@ public class MarketUserService {
      * @param request
      * @return
      */
-    public Map<String, Object> regist(HttpServletRequest request) {
+    /*public Map<String, Object> regist(HttpServletRequest request) {
         //获取注册参数
         String username = request.getParameter("userName");
         String password = request.getParameter("passWord");
@@ -92,7 +93,7 @@ public class MarketUserService {
         Map<String, Object> info = new HashMap<String, Object>();
         info.put("userToken", userToken);
         return info;
-    }
+    }*/
 
     /**
      * 用户修改密码
@@ -101,7 +102,7 @@ public class MarketUserService {
      * @param newPassword1
      * @param newPassword2
      */
-    public void updateNewPassword(HttpServletRequest request, String oldPassword, String newPassword1, String newPassword2) throws LException {
+    /*public void updateNewPassword(HttpServletRequest request, String oldPassword, String newPassword1, String newPassword2) throws LException {
         //得到当前用户登录的id
         String userId = String.valueOf(request.getSession().getAttribute("user"));
         if (oldPassword == null && oldPassword == "") {
@@ -136,42 +137,42 @@ public class MarketUserService {
         user.setUserUsername(MD5.md5(newPassword1));
         user.setUserId(Integer.valueOf(userId));
         marketUserMapper.updateByPrimaryKeySelective(user);
-    }
+    }*/
 
-    /**
+   /* *//**
      * 根据用户id查询信息
      *
      * @param id
      * @return
-     */
+     *//*
     public MarketUser selectById(int id) {
         return marketUserMapper.selectByPrimaryKey(id);
     }
 
-    /**
+    *//**
      * 查询所有用户
      * @return
-     */
-    public List<MarketUser> selectAllCardUser(){
+     *//*
+    *//*public List<MarketUser> selectAllCardUser(){
         List<MarketUser> cardUsers = marketUserMapper.selectAllMarketUser();
         return cardUsers;
-    }
+    }*//*
 
-    /**
+    *//**
      * 根据用户id修改用户信息
      * @return
-     */
+     *//*
     public int updateByPrimaryKeySelective(MarketUser cardUser){
         return marketUserMapper.updateByPrimaryKeySelective(cardUser);
     }
 
-    /**
+    *//**
      * 根据主键删除用户
      * @param userId
      * @return
-     */
+     *//*
     public int deleteByPrimaryKey(Integer userId){
         return marketUserMapper.deleteByPrimaryKey(userId);
     }
-
+*/
 }

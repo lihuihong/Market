@@ -13,7 +13,7 @@ body {font-size:14px;font-family:Helvetica,Microsoft YaHei,SimSun,Arial,Tahoma;b
 .layui-side-scroll {background:rgb(68,72,84)}
 .layui-side .layui-icon {display:inline-block;width:40px;font-size:18px;}
 .layui-nav-tree {width:100%;}
-.layui-logo {background:rgb(68,72,84);color:rgb(255,255,255)}
+.layui-logo {background:rgb(68,72,84);color:rgb(255,255,255);padding: 17px;font-size: 20px;text-align: center;}
 .layui-nav {border-radius:0px}
 /*主体样式*/
 .layui-bodier {margin-left:220px;padding:10px 20px;}

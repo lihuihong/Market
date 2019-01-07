@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,6 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="./layui/css/layui.css" media="all">
     <link rel="stylesheet" href="css/login.css" media="all">
 </head>
@@ -18,7 +16,7 @@
 <div class="layui-container">
     <div class="layui-row">
         <div class="layui-col-lg12 p1">
-            <span><img src="images/logo.png" /></span><span><b>汽车市场调研系统</b><cite></cite></span><i>网站管理系统</i>
+            <span><b>汽车市场调研系统</b><cite></cite></span><i>网站管理系统</i>
         </div>
     </div>
     <div class="layui-row">
@@ -59,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="p3">Copyright 2018 汽车市场调研系统 </div>
+    <div class="p3">Copyright 2019 汽车市场调研系统 by 张粟</div>
 </div>
 </body>
 <script src="layui/layui.js" charset="utf-8"></script>
@@ -68,37 +66,37 @@
         var form = layui.form;
         var $ = layui.jquery;
 
-        // form.verify({
-        //     user: function(value, item){ //value：表单的值、item：表单的DOM对象
-        //         if (/[\u4E00-\u9FA5]/g.test(value)) {
-        //             return '账号不能是汉字';
-        //         }
-        //         if (!(/^[\S]{6,16}$/).test(value)) {
-        //             return '账号必须6到16位，且不能出现空格'
-        // 		}
-        //         if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
-        //             return '用户名不能有特殊字符';
-        //         }
-        //         if(/(^\_)|(\__)|(\_+$)/.test(value)){
-        //             return '用户名首尾不能出现下划线\'_\'';
-        //         }
-        //         if(/^\d+\d+\d$/.test(value)){
-        //             return '用户名不能全为数字';
-        //         }
-        //     }
-        //
-        //     //我们既支持上述函数式的方式，也支持下述数组的形式
-        //     //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
-        //     ,pwd: [
-        //         /^[\S]{6,16}$/
-        //         ,'密码必须6到16位，且不能出现空格'
-        //     ]
-        // });
+        form.verify({
+            user: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if (/[\u4E00-\u9FA5]/g.test(value)) {
+                    return '账号不能是汉字';
+                }
+                if (!(/^[\S]{5,16}$/).test(value)) {
+                    return '账号必须5到16位，且不能出现空格'
+        		}
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '用户名不能有特殊字符';
+                }
+                if(/(^\_)|(\__)|(\_+$)/.test(value)){
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if(/^\d+\d+\d$/.test(value)){
+                    return '用户名不能全为数字';
+                }
+            }
+
+            //我们既支持上述函数式的方式，也支持下述数组的形式
+            //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+            ,pwd: [
+                /^[\S]{6,16}$/
+                ,'密码必须6到16位，且不能出现空格'
+            ]
+        });
 
         //监听提交
         form.on('submit(submit)',function(data){
             $.ajax({
-                url:'/admin/login',
+                url:'/user/login',
                 type:'post',
                 data:data.field,
                 dataType:"json",
@@ -108,7 +106,7 @@
                 success:function(data){
                     //do something
                     if(data.code==0){
-                        location.href="/admin/main";
+                        location.href="/page/main";
                     } else {
                         $('.tips').text(data.msg);
                     }

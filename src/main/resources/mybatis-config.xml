@@ -3,6 +3,11 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<!-- 引入分页插件 -->
+
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+	</settings>
+
 	<plugins>
 		<plugin interceptor="com.github.pagehelper.PageInterceptor">
 			<!-- 分页参数合理化 -->

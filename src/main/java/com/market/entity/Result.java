@@ -1,68 +1,57 @@
 package com.market.entity;
 
-import org.springframework.util.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Created by 那个谁 on 2018/12/30.
+ * Created by 那个谁 on 2019/01/04.
  */
 public class Result {
 
-    // code 状态码： 成功：000000，失败：111111
-    private String code;
+    // code 状态码： 成功：0，失败：1
+    private Integer code;
     // 错误信息
-    private String message;
+    private String msg;
     // 返回的数据（链式）
-    private Map<String, Object> data = new HashMap<String, Object>();
+    private Object data;
 
-    public static Result success() {
-        Result result = new Result();
-        result.setCode("000000");
-        result.setMessage("成功!!!");
-        return result;
+    private Integer count;
+
+    public void setSuccess(String msg) {
+        this.setCode(0);
+        this.setMsg(msg);
     }
 
-    public static Result success(int code,String message) {
-        Result result = new Result();
-        result.setCode("000000");
-        result.setMessage("成功!!!");
-        return result;
+    public void setError(String string) {
+        this.setCode(1);
+        this.setMsg(msg);
     }
 
-    public static Result error(String string) {
-        Result result = new Result();
-        result.setCode("111111");
-        if (StringUtils.isEmpty(string)) {
-            result.setMessage("失败!!!");
-        } else {
-            result.setMessage(string);
-        }
-        return result;
+    public Integer getCount() {
+        return count;
     }
 
-    public Result add(String key, Object value) {
-        this.getData().put(key, value);
-        return this;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
-    public String getMessage() {
-        return message;
+
+    public String getMsg() {
+        return msg;
     }
-    public void setMessage(String message) {
-        this.message = message;
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
-    public Map<String, Object> getData() {
+
+    public Object getData() {
         return data;
     }
-    public void setData(Map<String, Object> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 }
