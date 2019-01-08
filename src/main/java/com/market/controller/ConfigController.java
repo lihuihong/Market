@@ -2,11 +2,11 @@ package com.market.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import com.market.entity.MarketConfigure;
 import com.market.entity.MarketData;
-import com.market.entity.MarketVehicle;
 import com.market.entity.Result;
+import com.market.services.ConfigService;
 import com.market.services.DataService;
-import com.market.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/data")
-public class DataController {
+@RequestMapping(value = "/config")
+public class ConfigController {
 
 	@Autowired
-	private DataService dataService;
+	private ConfigService configService;
 
 	/**
 	 * 单纯的页面跳转
@@ -29,12 +29,11 @@ public class DataController {
 	 */
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public Result page(Integer page, Integer limit, MarketData marketData) {
+	public Result page(Integer page, Integer limit, MarketConfigure marketConfigure) {
 
 		Page pageBean = new Page(page,limit);
-		List<MarketData> marketDatas= dataService.selectList(marketData);
-		PageInfo<MarketData> pageInfo = new PageInfo<>(marketDatas);
-
+		List<MarketConfigure> marketConfigures= configService.selectList(marketConfigure);
+		PageInfo<MarketConfigure> pageInfo = new PageInfo<>(marketConfigures);
 
 		Result result = new Result();
 
@@ -53,12 +52,12 @@ public class DataController {
 	 */
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Result save(MarketData marketData) {
+	public Result save(MarketConfigure marketConfigure) {
 
-		if(marketData.getDataId() == null){
-			dataService.insertSelective(marketData);
+		if(marketConfigure.getConfigureId() == null){
+			configService.insertSelective(marketConfigure);
 		}else{
-			dataService.updateByPrimaryKeySelective(marketData);
+			configService.updateByPrimaryKeySelective(marketConfigure);
 		}
 
 		Result result = new Result();
@@ -76,7 +75,7 @@ public class DataController {
 	@ResponseBody
 	public Result del(Integer id) {
 
-		dataService.deleteByPrimaryKey(id);
+		configService.deleteByPrimaryKey(id);
 
 		Result result = new Result();
 		result.setSuccess("成功");

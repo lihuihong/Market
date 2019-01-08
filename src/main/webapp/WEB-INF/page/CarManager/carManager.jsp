@@ -15,7 +15,7 @@
         <div class="layui-form-item layui-elem-quote">
             <label class="layui-form-label">车品牌</label>
             <div class="layui-input-inline">
-                <input type="text" name="vehicleName" id="vehicleName" autocomplete="off" placeholder="请输入问卷名称" class="layui-input">
+                <input type="text" name="vehicleName" id="vehicleName" autocomplete="off" placeholder="请输入车辆名称" class="layui-input">
             </div>
             <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
             <button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增车辆</button>

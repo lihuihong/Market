@@ -23,38 +23,46 @@
         <div class="layui-form-item">
             <label class="layui-form-label">车名</label>
             <div class="layui-input-block">
-                <select name="vehicleId" lay-filter="vehicleId" id="vehicleId" lay-verify="required" >
+                <select name="vehicleId" lay-filter="vehicleId" id="vehicleId">
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">发动机</label>
-            <div class="layui-input-block">
-                <input type="text" placeholder="请输入发动机" name="dataEngine" lay-verify="required" class="layui-input">
+            <label class="layui-form-label">踏板</label>
+            <div class="layui-input-inline">
+                <input type="text" placeholder="请输入踏板" name="configurePedal" lay-verify="required" class="layui-input">
+            </div>
+            <div class="layui-form-label">座椅</div>
+            <div class="layui-input-inline">
+                <input type="text" placeholder="请输出座椅" name="configureSeat" lay-verify="required" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-form-label">最大马力</div>
-            <div class="layui-input-block">
-                <input type="text" placeholder="请输出最大马力" name="dataPower" lay-verify="required" class="layui-input">
+            <div class="layui-form-label">换挡拨片</div>
+            <div class="layui-input-inline">
+                <input type="text" placeholder="请输出换挡拨片" name="configurePick" lay-verify="required" class="layui-input">
+            </div>
+            <div class="layui-form-label">后视镜</div>
+            <div class="layui-input-inline">
+                <input type="text" placeholder="请输出后视镜" name="configureMirror" lay-verify="required" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-form-label">最大扭矩</div>
+            <div class="layui-form-label">轮胎</div>
             <div class="layui-input-block">
-                <input type="text" placeholder="请输出最大扭矩" name="dataTorque" lay-verify="required" class="layui-input">
+                <input type="text" placeholder="请输出轮胎" name="configureTyre" lay-verify="required" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-form-label">变速箱</div>
+            <div class="layui-form-label">车载导航</div>
             <div class="layui-input-block">
-                <input type="text" placeholder="请输出变速箱" name="dataCase" lay-verify="required" class="layui-input">
+                <input type="text" placeholder="请输出车载导航" name="configureCompass" lay-verify="required" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-form-label">最高车速</div>
+            <div class="layui-form-label">大灯</div>
             <div class="layui-input-block">
-                <input type="text" placeholder="请输出最高车速" name="dataSpeed" lay-verify="required" class="layui-input">
+                <input type="text" placeholder="请输出大灯" name="configureHeadlamps" lay-verify="required" class="layui-input">
             </div>
         </div>
         <div class="frameBtn">
@@ -67,11 +75,6 @@
 <script src="/layui/layui.js" charset="utf-8"></script>
 <script>
 
-    var data;
-    function child(d){
-        data = d;
-    }
-
     layui.use(['form'], function(){
         var form = layui.form;
         var $ = layui.jquery;
@@ -80,20 +83,16 @@
             url:'/vehicle/findAll',
             type:'get',
             dataType:"json",
-            success:function(dat){
+            success:function(data){
                 //do something
                 var html = '';
-                if(dat.code==0){
-                    $.each(dat.data,function(index,value){
-                        if (index === 0){
-                            html += '<option value="'+value.vehicleId+'" selected>'+value.vehicleName+'</option>';
-                        }else {
-                            html += '<option value="'+value.vehicleId+'">'+value.vehicleName+'</option>';
-                        }
+                if(data.code==0){
+                    $.each(data.data,function(index,value){
+
+                        html += '<option value="'+value.vehicleId+'">'+value.vehicleName+'</option>';
                     });
                     $('#vehicleId').html(html);
                     form.render('select');
-
                 } else {
                     layer.alert('抱歉，系统繁忙，请稍后再试！',{icon:2});
                 }
@@ -105,7 +104,7 @@
         form.on('submit(submit)',function(data){
             layer.confirm('是否确定修改？',{icon: 3, title:'系统信息'},function(index){
                 $.ajax({
-                    url:'/data/save',
+                    url:'/config/save',
                     type:'post',
                     data:data.field,
                     dataType:"json",

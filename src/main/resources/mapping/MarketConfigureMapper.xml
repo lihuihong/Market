@@ -11,13 +11,19 @@
     <result column="CONFIGURE_TYRE" jdbcType="VARCHAR" property="configureTyre" />
     <result column="CONFIGURE_COMPASS" jdbcType="VARCHAR" property="configureCompass" />
     <result column="CONFIGURE_HEADLAMPS" jdbcType="VARCHAR" property="configureHeadlamps" />
+    <association property="vehicle" column="VEHICLE_ID" select="com.market.dao.MarketVehicleMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Base_Column_List">
     CONFIGURE_ID, VEHICLE_ID, CONFIGURE_PEDAL, CONFIGURE_SEAT, CONFIGURE_PICK, CONFIGURE_MIRROR, 
     CONFIGURE_TYRE, CONFIGURE_COMPASS, CONFIGURE_HEADLAMPS
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectList" parameterType="com.market.entity.MarketConfigure" resultMap="BaseResultMap">
     select 
+    <include refid="Base_Column_List" />
+    from market_configure
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from market_configure
     where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}

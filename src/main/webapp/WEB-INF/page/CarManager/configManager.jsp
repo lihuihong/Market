@@ -37,17 +37,19 @@
         //加载表格
         table.render({
             elem: '#tableList'
-            ,url:'/data/list'
+            ,url:'/config/list'
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,cols: [[
                 {field:'vehicleName', title: '车名', align:'center',templet:function (d) {
                         return d.vehicle.vehicleName;
                     }},
-                {field:'dataEngine', title: '发动机', align:'center'},
-                {field:'dataPower', title: '最大马力', align:'center',style:'max-width: 90%;'},
-                {field:'dataTorque', title: '最大扭矩', align:'center'},
-                {field:'dataCase', title: '变速箱', align:'center'},
-                {field:'dataSpeed', title: '最高车速', align:'center'},
+                {field:'configurePedal', title: '踏板', align:'center'},
+                {field:'configureSeat', title: '座椅', align:'center',style:'max-width: 90%;'},
+                {field:'configurePick', title: '换挡拨片', align:'center'},
+                {field:'configureMirror', title: '后视镜', align:'center'},
+                {field:'configureTyre', title: '轮胎', align:'center'},
+                {field:'configureCompass', title: '车载导航', align:'center'},
+                {field:'configureHeadlamps', title: '大灯', align:'center'},
                 //{field:'assessment', title: '状态', align:'center'},
                 {fixed: 'right', width:260, title: '操作', align:'center', toolbar: '#barDemo'}
             ]],
@@ -72,12 +74,12 @@
                     title: '编辑车辆',
                     type: 2,
                     shade: false,
-                    area: ['500px', '500px'],
+                    area: ['700px', '500px'],
                     maxmin: true,
                     btnAlign: 'c',
                     anim: 0,
                     shade: [0.5, 'rgb(0,0,0)'],
-                    content: '/page/CarManager/paramterEdit',
+                    content: '/page/CarManager/configEdit',
                     zIndex: layer.zIndex, //重点1
                     success: function (layero,index) {
                         // 获取子页面的iframe
@@ -93,9 +95,9 @@
             }else if(obj.event == 'del'){
                 layer.confirm('名称：'+data.vehicle.vehicleName, {icon: 3, title:'是否确定删除?'}, function(index){
                     $.ajax({
-                        url:'/data/delete',
+                        url:'/config/delete',
                         type:'post',
-                        data:{'id':data.dataId},
+                        data:{'id':data.configureId},
                         dataType:"json",
                         beforeSend:function(){//console.log(JSON.stringify(data.field));
                         },
@@ -121,12 +123,12 @@
                 title: '新增车辆',
                 type: 2,
                 shade: false,
-                area: ['500px', '500px'],
+                area: ['700px', '500px'],
                 maxmin: true,
                 btnAlign: 'c',
                 anim: 0,
                 shade: [0.5, 'rgb(0,0,0)'],
-                content: '/page/CarManager/paramterAdd',
+                content: '/page/CarManager/configAdd',
                 zIndex: layer.zIndex, //重点1
                 success: function(layero){
                     //layer.setTop(layero); //顶置窗口

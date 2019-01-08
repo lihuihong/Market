@@ -21,6 +21,16 @@ public class MarketConfigure implements Serializable {
 
     private String configureHeadlamps;
 
+    private MarketVehicle vehicle;
+
+    public MarketVehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(MarketVehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getConfigureId() {

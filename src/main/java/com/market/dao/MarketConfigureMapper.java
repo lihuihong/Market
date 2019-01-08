@@ -2,7 +2,10 @@ package com.market.dao;
 
 import com.market.entity.MarketConfigure;
 
+import java.util.List;
+
 public interface MarketConfigureMapper {
+
     int deleteByPrimaryKey(Integer configureId);
 
     int insert(MarketConfigure record);
@@ -10,6 +13,8 @@ public interface MarketConfigureMapper {
     int insertSelective(MarketConfigure record);
 
     MarketConfigure selectByPrimaryKey(Integer configureId);
+
+    List<MarketConfigure> selectList(MarketConfigure marketConfigure);
 
     int updateByPrimaryKeySelective(MarketConfigure record);
 

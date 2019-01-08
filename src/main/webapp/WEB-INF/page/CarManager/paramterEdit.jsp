@@ -30,7 +30,6 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">发动机</label>
-            <input type="hidden" name="vehicleId">
             <div class="layui-input-block">
                 <input type="text" placeholder="请输入发动机" name="dataEngine" lay-verify="required" class="layui-input">
             </div>
