@@ -1,12 +1,9 @@
 package com.market.controller;
 
-import com.fjy.costume.entity.PageBean;
-import com.fjy.costume.entity.Result;
-import com.fjy.costume.entity.Role;
-import com.fjy.costume.entity.User;
-import com.fjy.costume.service.UserService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.market.entity.Result;
+import com.market.entity.Role;
 import com.market.entity.User;
 import com.market.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-/**
- * @author 冯健芸
- * @create 2018-01-02 11:18
- *
- * 用户Controller层
- */
+
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -45,9 +37,9 @@ public class UserController {
         Result result = new Result();
         User resultUser = userService.login(user);
         if(resultUser==null){
-            result.setErrorMsg("用户名或密码错误！");
+            result.setError("用户名或密码错误！");
         }else{
-            result.setSuccessMsg("登录成功！");
+            result.setSuccess("登录成功！");
             HttpSession session=request.getSession();
             session.setAttribute("userInfo",resultUser);
         }
@@ -66,9 +58,9 @@ public class UserController {
         Result result = new Result();
         User resultUser = (User) request.getSession().getAttribute("userInfo");
         if(resultUser==null){
-            result.setErrorMsg("访问出错");
+            result.setError("访问出错");
         }else{
-            result.setSuccessMsg("成功！");
+            result.setSuccess("成功！");
             result.setData(resultUser);
         }
         return result;
@@ -93,12 +85,12 @@ public class UserController {
             user.setRole(role);
             int num = userService.add(user);
             if(num > 0){
-                result.setSuccessMsg("注册成功!");
+                result.setSuccess("注册成功!");
             }else{
-                result.setErrorMsg("注册失败！");
+                result.setError("注册失败！");
             }
         }else{
-            result.setErrorMsg("用户已经存在！");
+            result.setError("用户已经存在！");
         }
 
         return result;
@@ -117,18 +109,19 @@ public class UserController {
     public Result list(Integer page, Integer limit , User s_user,
                        HttpServletResponse response)throws Exception{
 
-        PageBean pageBean = new PageBean(page,limit);
+
+        Page pageBean = new Page(page,limit);
         List<User> customerList = userService.list(s_user);
         PageInfo<User> pageInfo = new PageInfo<>(customerList);
 
         Result result = new Result();
 
         if(pageInfo.getTotal() > 0){
-            result.setSuccessMsg("获取成功");
+            result.setSuccess("获取成功");
             result.setData(pageInfo.getList());
             result.setCount((int) pageInfo.getTotal());
         }else{
-            result.setSuccessMsg("获取失败");
+            result.setSuccess("获取失败");
             result.setCount(0);
         }
 
@@ -157,9 +150,9 @@ public class UserController {
         }
 
         if(resultTotal>0){
-            result.setSuccessMsg("成功");
+            result.setSuccess("成功");
         }else{
-            result.setErrorMsg("失败");
+            result.setError("失败");
         }
 
         return result;
@@ -186,7 +179,7 @@ public class UserController {
         Result result = new Result();
 
         if(!(password.equals(password1))){
-            result.setErrorMsg("原密码不正确");
+            result.setError("原密码不正确");
         }else{
 
             password = request.getParameter("password3");
@@ -218,9 +211,9 @@ public class UserController {
         Result result = new Result();
 
         if(num>0){
-            result.setSuccessMsg("成功");
+            result.setSuccess("成功");
         }else{
-            result.setErrorMsg("失败");
+            result.setError("失败");
         }
 
         return result;
@@ -242,9 +235,9 @@ public class UserController {
         Result result = new Result();
 
         if(resultTotal>0){
-            result.setSuccessMsg("成功");
+            result.setSuccess("成功");
         }else{
-            result.setErrorMsg("失败");
+            result.setError("失败");
         }
 
         return result;
@@ -260,7 +253,7 @@ public class UserController {
     public Result logout(HttpSession session)throws Exception{
         session.invalidate();
         Result result = new Result();
-        result.setSuccessMsg("成功");
+        result.setSuccess("成功");
         return result;
     }
 }

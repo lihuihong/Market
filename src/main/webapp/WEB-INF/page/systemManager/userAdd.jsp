@@ -5,9 +5,9 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/resource/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/resource/css/login.css" media="all">
-    <title>服装销售管理</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/css/login.css" media="all">
+    <title>汽车市场调研系统</title>
 	<script type="text/javascript">
 
 	</script>
@@ -55,7 +55,7 @@
     </div>
 </form>
 </body>
-<script src="/resource/layui/layui.js" charset="utf-8"></script>
+<script src="/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form','laydate'], function() {
         var form = layui.form;

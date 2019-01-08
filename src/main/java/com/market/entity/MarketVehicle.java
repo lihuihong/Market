@@ -7,6 +7,8 @@ public class MarketVehicle implements Serializable {
 
     private String vehicleName;
 
+    private String vehicleBrand;
+
     private String vehicleType;
 
     private String vehicleColor;
@@ -14,6 +16,14 @@ public class MarketVehicle implements Serializable {
     private String vehicleNumber;
 
     private static final long serialVersionUID = 1L;
+
+    public String getVehicleBrand() {
+        return vehicleBrand;
+    }
+
+    public void setVehicleBrand(String vehicleBrand) {
+        this.vehicleBrand = vehicleBrand;
+    }
 
     public Integer getVehicleId() {
         return vehicleId;

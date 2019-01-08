@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.dao.UserDao">
+    <resultMap id="UserResult" type="User">
+        <id property="id" column="id"></id>
+        <result property="userName" column="userName"></result>
+        <result property="password" column="password"></result>
+        <result property="trueName" column="trueName"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <association property="role" column="roleId" select="com.market.dao.RoleDao.findById"></association>
+    </resultMap>
+
+    <select id="login" parameterType="User" resultType="User">
+        select * from market_user where userName=#{userName} and password=#{password}
+    </select>
+
+    <select id="list" parameterType="User" resultMap="UserResult">
+        select * from market_user
+         <where>
+            <if test="userName!=null and userName!=''">
+                and userName like CONCAT('%',#{userName},'%')
+            </if>
+         </where>
+    </select>
+
+    <select id="getTotal" parameterType="Map" resultType="Long">
+        select count(*) from market_user
+          <where>
+              <if test="userName!=null and userName!=''">
+                  and userName like #{userName}
+              </if>
+          </where>
+    </select>
+    
+    <insert id="add" parameterType="User">
+        insert into market_user values (null,#{userName},#{password},#{trueName},#{email},#{phone},#{roleId})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update market_user
+        <set>
+            <if test="userName!=null and userName!=''">
+                userName=#{userName},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="trueName!=null and trueName!=''">
+                trueName=#{trueName},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                roleId=#{roleId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from market_user where id=#{id}
+    </delete>
+</mapper> 

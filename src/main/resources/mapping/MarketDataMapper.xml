@@ -9,6 +9,7 @@
     <result column="DATA_TORQUE" jdbcType="VARCHAR" property="dataTorque" />
     <result column="DATA_CASE" jdbcType="VARCHAR" property="dataCase" />
     <result column="DATA_SPEED" jdbcType="VARCHAR" property="dataSpeed" />
+    <association property="vehicle" column="VEHICLE_ID" select="com.market.dao.MarketVehicleMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Base_Column_List">
     DATA_ID, VEHICLE_ID, DATA_ENGINE, DATA_POWER, DATA_TORQUE, DATA_CASE, DATA_SPEED
@@ -19,6 +20,19 @@
     from market_data
     where DATA_ID = #{dataId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectList" parameterType="com.market.entity.MarketData" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_data
+    <where>
+      <if test="vehicle!=null">
+        and VEHICLE_ID = #{vehicle.vehicleId,jdbcType=INTEGER}
+      </if>
+    </where>
+
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from market_data
     where DATA_ID = #{dataId,jdbcType=INTEGER}

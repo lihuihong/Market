@@ -1,5 +1,7 @@
 package com.market.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.market.entity.MarketQuestion;
 import com.market.entity.MarketSurvey;
 import com.market.entity.Result;
@@ -28,14 +30,17 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public Result page(MarketQuestion marketQuestion) {
+	public Result page(Integer page, Integer limit,MarketQuestion marketQuestion) {
 
+		Page pageBean = new Page(page,limit);
 		List<MarketQuestion> questions= questionService.selectList(marketQuestion);
+		PageInfo<MarketQuestion> pageInfo = new PageInfo<>(questions);
 
 		Result result = new Result();
 		result.setSuccess("成功");
-		result.setData(questions);
-		result.setCount(questions.size());
+		result.setData(pageInfo.getList());
+		result.setCount((int) pageInfo.getTotal());
+
 		return result;
 	}
 
@@ -50,7 +55,7 @@ public class QuestionController {
 	@ResponseBody
 	public Result save(MarketQuestion marketQuestio) {
 
-		if(marketQuestio.getSurveyId() == null){
+		if(marketQuestio.getQuestionId() == null){
 
 			marketQuestio.setQuestionTime(new Date());
 

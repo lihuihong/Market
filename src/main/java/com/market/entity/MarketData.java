@@ -7,6 +7,8 @@ public class MarketData implements Serializable {
 
     private Integer vehicleId;
 
+    private MarketVehicle vehicle;
+
     private String dataEngine;
 
     private String dataPower;
@@ -18,6 +20,14 @@ public class MarketData implements Serializable {
     private String dataSpeed;
 
     private static final long serialVersionUID = 1L;
+
+    public MarketVehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(MarketVehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 
     public Integer getDataId() {
         return dataId;

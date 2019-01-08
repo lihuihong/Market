@@ -1,7 +1,7 @@
 body {font-size:14px;font-family:Helvetica,Microsoft YaHei,SimSun,Arial,Tahoma;background:rgb(255,255,255)}
 /*顶部样式*/
 .layui-header {margin-left:220px}
-.layui-header .box {height:60px;background:rgb(57,61,73)}
+.layui-header .box {height:60px;background:rgb(0, 57, 103)}
 .layui-header .box .btnHeader {display:inline-block;height:60px;padding:0px 25px;line-height:60px; color:rgba(255,255,255,0.8);text-align:center;background:rgba(0,0,0,0)}
 .layui-header .box .btnHeader:hover {color:rgba(255,255,255,1);background:rgba(0,0,0,0.3)}
 .layui-header .box .navHeader {display:inline-block;cursor:pointer}
@@ -10,11 +10,17 @@ body {font-size:14px;font-family:Helvetica,Microsoft YaHei,SimSun,Arial,Tahoma;b
 .layui-header .header-right {float:right}
 /*导航样式*/
 .layui-side {width:220px;}
-.layui-side-scroll {background:rgb(68,72,84)}
+.layui-side-scroll {background:#001a2f}
 .layui-side .layui-icon {display:inline-block;width:40px;font-size:18px;}
 .layui-nav-tree {width:100%;}
-.layui-logo {background:rgb(68,72,84);color:rgb(255,255,255);padding: 17px;font-size: 20px;text-align: center;}
-.layui-nav {border-radius:0px}
+.layui-logo {background: #004c86;color:rgb(255,255,255);padding: 17px;font-size: 20px;text-align: center;}
+.layui-nav {border-radius:0px;background: rgb(0, 57, 103)}
+.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-this>a{background-color: #003967;}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover{
+    background-color: #2196F3;
+}
+.layui-nav-tree .layui-nav-item a:hover {background-color: #03A9F4}
+.layui-nav-tree .layui-nav-bar {background-color: #2196F3}
 /*主体样式*/
 .layui-bodier {margin-left:220px;padding:10px 20px;}
 .layui-bodier .firstTab i {display:none}

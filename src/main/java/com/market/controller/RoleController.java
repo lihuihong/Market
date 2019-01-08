@@ -1,8 +1,9 @@
 package com.market.controller;
 
-import com.fjy.costume.entity.*;
-import com.fjy.costume.service.FunService;
-import com.fjy.costume.service.RoleService;
+import com.market.entity.Fun;
+import com.market.entity.Result;
+import com.market.entity.Role;
+import com.market.services.FunServiceImpl;
 import com.market.services.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-/**
- * @author 冯健芸
- * @create 2018-01-02 11:18
- *
- * 用户Controller层
- */
+
 @Controller
 @RequestMapping(value = "/role")
 public class RoleController {
@@ -27,7 +23,7 @@ public class RoleController {
     private RoleServiceImpl roleService;
 
     @Autowired
-    private FunService funService;
+    private FunServiceImpl funService;
 
     /**
      * 查询所有权限信息
@@ -44,11 +40,11 @@ public class RoleController {
         Result result = new Result();
 
         if(roleList.size() > 0){
-            result.setSuccessMsg("获取成功");
+            result.setSuccess("获取成功");
             result.setData(roleList);
             result.setCount(roleList.size());
         }else{
-            result.setSuccessMsg("获取失败");
+            result.setSuccess("获取失败");
             result.setCount(0);
         }
 
@@ -71,10 +67,10 @@ public class RoleController {
         Role role  = roleService.findById(id);
 
         if(role != null){
-            result.setSuccessMsg("成功");
+            result.setSuccess("成功");
             result.setData(role);
         }else{
-            result.setErrorMsg("失败");
+            result.setError("失败");
         }
 
         return result;
@@ -95,10 +91,10 @@ public class RoleController {
         List<Fun> funs  = funService.list();
 
         if(funs.size() >= 1){
-            result.setSuccessMsg("成功");
+            result.setSuccess("成功");
             result.setData(funs);
         }else{
-            result.setErrorMsg("失败");
+            result.setError("失败");
         }
 
         return result;
@@ -126,9 +122,9 @@ public class RoleController {
         Result result=new Result();
 
         if(resultTotal>0){
-            result.setSuccessMsg("成功");
+            result.setSuccess("成功");
         }else{
-            result.setErrorMsg("失败");
+            result.setError("失败");
         }
         return result;
     }

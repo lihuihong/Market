@@ -1,15 +1,12 @@
 package com.market.dao;
 
 
-import com.fjy.costume.entity.Role;
+import com.market.entity.Role;
 
 import java.util.List;
 
-/**
- * @author 冯健芸
- * @create 2018-01-02 02:18
- * @name
- */
+
+
 public interface RoleDao {
 
     public Role findById(Integer id);

@@ -31,7 +31,7 @@
 					<div class="layui-nav">
 						<div class="layui-nav-item">
 							<a href="javascript:;">
-								<cite>${admin.user}</cite>
+								<%--<cite>${admin.user}</cite>--%>
 							</a>
 							<dl class="layui-nav-child">
 								<dd><a id="personalEdit" lay-href="personal/personalEdit.html">个人资料</a></dd>
@@ -56,23 +56,22 @@
 						<i class="layui-icon layui-icon-theme"></i><label>控制台</label>
 					</a>
 				</li>
-				<li data-name="template" class="layui-nav-item">
-					<a href="javascript:;" lay-tips="调研管理">
-						<i class="layui-icon "></i><label>调研管理</label>
-					</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a lay-href="/page/InvestigationManager/surveyManager" class="nav-tab" lay-id="1" data-type="tabAdd">
-								<i class="layui-icon"></i><label>问卷管理</label>
-							</a>
-						</dd>
-						<dd>
-							<a lay-href="/page/InvestigationManager/questionManager" class="nav-tab" lay-id="2" data-type="tabAdd">
-								<i class="layui-icon"></i><label>问卷内容管理</label>
-							</a>
-						</dd>
-					</dl>
-				</li>
+				<c:forEach var="role" items="${roles}" varStatus="item">
+					<li data-name="template" class="layui-nav-item">
+						<a href="javascript:;" lay-tips="${role.key}">
+							<i class="layui-icon ${icons[item.index]}"></i><label>${role.key}</label>
+						</a>
+						<dl class="layui-nav-child">
+							<c:forEach var="fun" items="${role.value}">
+								<dd>
+									<a lay-href="${fun.url}" class="nav-tab" lay-id="${fun.id}" data-type="tabAdd">
+										<i class="layui-icon"></i><label>${fun.name}</label>
+									</a>
+								</dd>
+							</c:forEach>
+						</dl>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>

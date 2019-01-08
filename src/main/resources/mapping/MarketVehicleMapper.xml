@@ -4,18 +4,29 @@
   <resultMap id="BaseResultMap" type="com.market.entity.MarketVehicle">
     <id column="VEHICLE_ID" jdbcType="INTEGER" property="vehicleId" />
     <result column="VEHICLE_NAME" jdbcType="VARCHAR" property="vehicleName" />
+    <result column="VEHICLE_BRAND" jdbcType="VARCHAR" property="vehicleBrand" />
     <result column="VEHICLE_TYPE" jdbcType="VARCHAR" property="vehicleType" />
     <result column="VEHICLE_COLOR" jdbcType="VARCHAR" property="vehicleColor" />
     <result column="VEHICLE_NUMBER" jdbcType="VARCHAR" property="vehicleNumber" />
   </resultMap>
   <sql id="Base_Column_List">
-    VEHICLE_ID, VEHICLE_NAME, VEHICLE_TYPE, VEHICLE_COLOR, VEHICLE_NUMBER
+    VEHICLE_ID, VEHICLE_NAME,VEHICLE_BRAND, VEHICLE_TYPE, VEHICLE_COLOR, VEHICLE_NUMBER
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from market_vehicle
     where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </select>
+  <select id="selectList" parameterType="com.market.entity.MarketVehicle" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_vehicle
+    <where>
+      <if test="vehicleName != null and vehicleName != ''">
+        and VEHICLE_NAME like CONCAT('%',#{vehicleName},'%')
+      </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from market_vehicle
@@ -36,6 +47,9 @@
       <if test="vehicleName != null">
         VEHICLE_NAME,
       </if>
+      <if test="vehicleBrand != null">
+        VEHICLE_BRAND,
+      </if>
       <if test="vehicleType != null">
         VEHICLE_TYPE,
       </if>
@@ -53,6 +67,9 @@
       <if test="vehicleName != null">
         #{vehicleName,jdbcType=VARCHAR},
       </if>
+      <if test="vehicleBrand != null">
+        #{vehicleBrand,jdbcType=VARCHAR},
+      </if>
       <if test="vehicleType != null">
         #{vehicleType,jdbcType=VARCHAR},
       </if>
@@ -69,6 +86,9 @@
     <set>
       <if test="vehicleName != null">
         VEHICLE_NAME = #{vehicleName,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleBrand != null">
+        VEHICLE_BRAND = #{vehicleBrand,jdbcType=VARCHAR},
       </if>
       <if test="vehicleType != null">
         VEHICLE_TYPE = #{vehicleType,jdbcType=VARCHAR},

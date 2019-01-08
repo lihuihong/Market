@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.market.dao.FunDao">
+
+    <resultMap id="FunResult" type="Fun">
+        <id property="id" column="id"></id>
+        <id property="name" column="name"></id>
+        <id property="icon" column="icon"></id>
+        <id property="url" column="url"></id>
+        <id property="pid" column="pid"></id>
+    </resultMap>
+
+    <select id="list" resultMap="FunResult">
+        select * from market_fun
+    </select>
+
+</mapper> 

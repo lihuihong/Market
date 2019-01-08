@@ -1,11 +1,6 @@
 package com.market.entity;
 
 /**
- * @author 冯健芸
- * @create 2018-01-02 14:24
- */
-
-/**
  * 用户实体类
  */
 public class User {

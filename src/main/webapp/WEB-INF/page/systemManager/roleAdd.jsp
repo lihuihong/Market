@@ -3,12 +3,12 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>用户管理</title>
+	<title>汽车市场调研系统</title>
 	<meta name="description" content="">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="/resource/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="/layui/css/layui.css" media="all">
 	<style>
 	.frameContent {padding:30px 30px 0px 0px}
 	.roleList {float:left;margin:5px 0px;width:33%}
@@ -41,7 +41,7 @@
 		</form>
 	</div>
 </body>
-<script src="/resource/layui/layui.js" charset="utf-8"></script>
+<script src="/layui/layui.js" charset="utf-8"></script>
 <script>
 
 layui.use(['form'], function(){

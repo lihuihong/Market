@@ -30,13 +30,13 @@
                             <div class="layui-form-item t">
                                 <div class="layui-form-label"><i class="layui-icon layui-icon-username"></i>账&nbsp;&nbsp;&nbsp;&nbsp;号：</div>
                                 <div class="layui-input-block">
-                                    <input type="text" name="user" required lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+                                    <input type="text" name="userName" required lay-verify="required|user" placeholder="请输入账号" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item t">
                                 <div class="layui-form-label"><i class="layui-icon layui-icon-password"></i>密&nbsp;&nbsp;&nbsp;&nbsp;码：</div>
                                 <div class="layui-input-block">
-                                    <input type="password" name="pwd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                                    <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item  t">
@@ -106,7 +106,7 @@
                 success:function(data){
                     //do something
                     if(data.code==0){
-                        location.href="/page/main";
+                        location.href="/main";
                     } else {
                         $('.tips').text(data.msg);
                     }

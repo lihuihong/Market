@@ -13,19 +13,18 @@
 <div>
     <form class="layui-form">
         <div class="layui-form-item layui-elem-quote">
-            <label class="layui-form-label">问卷名称</label>
+            <label class="layui-form-label">车名</label>
             <div class="layui-input-inline">
-                <input type="text" name="surveyName" id="surveyName" autocomplete="off" placeholder="请输入问卷名称" class="layui-input">
+                <input type="text" name="vehicleId" id="vehicleId" autocomplete="off" placeholder="请输入问卷名称" class="layui-input">
             </div>
             <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
-            <button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增问卷</button>
+            <button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增车辆</button>
         </div>
     </form>
     <table class="layui-hide" id="tableList" lay-filter="demo"></table>
 </div>
 </body>
 <script src="/layui/layui.js" charset="utf-8"></script>
-<script src="/js/my.js" charset="utf-8"></script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -38,15 +37,17 @@
         //加载表格
         table.render({
             elem: '#tableList'
-            ,url:'/survey/list'
+            ,url:'/data/list'
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,cols: [[
-                {field:'surveyName', title: '问卷名称', align:'center'},
-                {field:'surveyDesc',width:'40%', title: '问卷简介', align:'center',style:'max-width: 90%;'},
-                //{field:'rName', title: '联系人', align:'center'},
-                {field:'surveyTime', title: '提交时间', align:'center',templet:function (row) {
-                        return createTime(row.surveyTime);
+                {field:'vehicleName', title: '车名', align:'center',templet:function (d) {
+                        return d.vehicle.vehicleName;
                     }},
+                {field:'dataEngine', title: '发动机', align:'center'},
+                {field:'dataPower', title: '最大马力', align:'center',style:'max-width: 90%;'},
+                {field:'dataTorque', title: '最大扭矩', align:'center'},
+                {field:'dataCase', title: '变速箱', align:'center'},
+                {field:'dataSpeed', title: '最高车速', align:'center'},
                 //{field:'assessment', title: '状态', align:'center'},
                 {fixed: 'right', width:260, title: '操作', align:'center', toolbar: '#barDemo'}
             ]],
@@ -59,7 +60,7 @@
                     curr: 1 //重新从第 1 页开始
                 },
                 where: {
-                    'surveyName': $('#surveyName').val(),
+                    'vehicleId': $('#vehicleId').val(),
                 }
             });
         });
@@ -68,15 +69,15 @@
             var data = obj.data;
             if (obj.event == 'edit') {
                 layer.open({
-                    title: '编辑问卷',
+                    title: '编辑车辆',
                     type: 2,
                     shade: false,
-                    area: ['600px', '400px'],
+                    area: ['500px', '500px'],
                     maxmin: true,
                     btnAlign: 'c',
                     anim: 0,
                     shade: [0.5, 'rgb(0,0,0)'],
-                    content: '/page/InvestigationManager/surveyEdit',
+                    content: '/page/CarManager/paramterEdit',
                     zIndex: layer.zIndex, //重点1
                     success: function (layero,index) {
                         // 获取子页面的iframe
@@ -90,11 +91,11 @@
                     }
                 });
             }else if(obj.event == 'del'){
-                layer.confirm('名称：'+data.surveyName, {icon: 3, title:'是否确定删除?'}, function(index){
+                layer.confirm('名称：'+data.vehicleName, {icon: 3, title:'是否确定删除?'}, function(index){
                     $.ajax({
-                        url:'/survey/delete',
+                        url:'/data/delete',
                         type:'post',
-                        data:{'id':data.surveyId},
+                        data:{'id':data.dataId},
                         dataType:"json",
                         beforeSend:function(){//console.log(JSON.stringify(data.field));
                         },
@@ -117,15 +118,15 @@
         //新增账号
         $('.btnAdd').on('click',function(){
             layer.open({
-                title: '新增问卷',
+                title: '新增车辆',
                 type: 2,
                 shade: false,
-                area: ['600px', '400px'],
+                area: ['500px', '500px'],
                 maxmin: true,
                 btnAlign: 'c',
                 anim: 0,
                 shade: [0.5, 'rgb(0,0,0)'],
-                content: '/page/InvestigationManager/surveyAdd',
+                content: '/page/CarManager/paramterAdd',
                 zIndex: layer.zIndex, //重点1
                 success: function(layero){
                     //layer.setTop(layero); //顶置窗口

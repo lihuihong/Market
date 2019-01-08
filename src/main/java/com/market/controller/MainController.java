@@ -1,12 +1,29 @@
 package com.market.controller;
 
+import com.market.entity.Fun;
+import com.market.entity.Role;
+import com.market.entity.User;
+import com.market.services.FunServiceImpl;
+import com.market.services.RoleServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Controller
 public class MainController {
+
+
+	@Autowired
+	private RoleServiceImpl roleServiceImp;
+	@Autowired
+	private FunServiceImpl funServiceImp;
 
 	/**
 	 * 单纯的页面跳转
@@ -45,41 +62,37 @@ public class MainController {
 	}
 
 
+
 	/**
 	 * 跳转到主页面
-	 * 
+	 *
 	 * @param session
 	 * @param request
 	 * @return
-	 *//*
+	 */
 	@RequestMapping("/main")
 	public String main(HttpSession session, HttpServletRequest request) {
-		UserAdminEntity admin = (UserAdminEntity) session.getAttribute(Utils.SESSION_USER);
 
-		Map<String, List<FunEntity>> roles = new LinkedHashMap<>();
+		User admin = (User) session.getAttribute("userInfo");
+
+		Map<String, List<Fun>> roles = new LinkedHashMap<>();
 		List<String> icons = new ArrayList<>();
 
 		// 获取用户角色信息
-		RoleEntity r = new RoleEntity();
-		r.setId(admin.getrIdu());
-		RspDataVo<RoleEntity> page = roleServiceImp.page(1, 1, r);
-		if (page.getCount() > 0) {
-			r = page.getData().get(0);
-		}
-		String funstr = r.getFunction();
+		Role role  = roleServiceImp.findById(admin.getRoleId());
+		String funstr = role.getFuns();
 		List<String> funs = Arrays.asList(funstr.split(","));
 		// 获取所有模块和功能
-		RspDataVo<FunEntity> modFun = funServiceImp.page(1, 200, new FunEntity());
-		List<FunEntity> modAndFuns = modFun.getData();
+		List<Fun> modAndFuns = funServiceImp.list();
 
 		// 获取所有模块
-		List<FunEntity> mods = modAndFuns.stream().filter(t -> t.getpId().equals(0)).collect(Collectors.toList());
+		List<Fun> mods = modAndFuns.stream().filter(t -> t.getPid().equals(0)).collect(Collectors.toList());
 		// 便利模块
-		for (FunEntity mod : mods) {
+		for (Fun mod : mods) {
 			// 获取该模块下用户拥有的所有功能
 			icons.add(mod.getIcon());
-			List<FunEntity> functions = modAndFuns.stream()
-					.filter(t -> t.getpId().equals(mod.getId()) && funs.contains("" + t.getId()))
+			List<Fun> functions = modAndFuns.stream()
+					.filter(t -> t.getPid().equals(mod.getId()) && funs.contains("" + t.getId()))
 					.collect(Collectors.toList());
 			if (functions.size() > 0) {
 				roles.put(mod.getName(), functions);
@@ -88,8 +101,8 @@ public class MainController {
 		request.setAttribute("roles", roles);
 		request.setAttribute("icons", icons);
 		request.setAttribute("admin", admin);
-		return "main";
-	}*/
+		return "/main";
+	}
 
 
 

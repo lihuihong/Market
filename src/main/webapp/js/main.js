@@ -88,7 +88,7 @@ layui.use(['element','layer'],function(){
 	$('.logout').on('click',function(){
 		layer.confirm('是否确定退出系统？', {icon: 3, title:'系统信息'}, function(index){
 			$.ajax({
-				url:'/admin/admin/logout',
+				url:'/user/logout',
 				type:'get',
 				data:'',
 				dataType:"json",
