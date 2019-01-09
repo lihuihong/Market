@@ -4,10 +4,18 @@
   <resultMap id="BaseResultMap" type="com.market.entity.MarketAnswer">
     <id column="ANSWER_ID" jdbcType="INTEGER" property="answerId" />
     <result column="SURVEY_ID" jdbcType="INTEGER" property="surveyId" />
+    <result column="QUESTION_ID" jdbcType="INTEGER" property="questionId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
     <result column="ANSWER_CONTENT" jdbcType="VARCHAR" property="answerContent" />
+    <result column="ANSWER_TIME" jdbcType="TIMESTAMP" property="answerTime" />
+
+    <association property="survey" column="SURVEY_ID" select="com.market.dao.MarketSurveyMapper.selectByPrimaryKey"></association>
+    <association property="question" column="QUESTION_ID" select="com.market.dao.MarketQuestionMapper.selectByPrimaryKey"></association>
+    <association property="user" column="USER_ID" select="com.market.dao.UserDao.selectByPrimaryKey"></association>
+
   </resultMap>
   <sql id="Base_Column_List">
-    ANSWER_ID, SURVEY_ID, ANSWER_CONTENT
+    ANSWER_ID, SURVEY_ID, QUESTION_ID,USER_ID,ANSWER_CONTENT,ANSWER_TIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -15,10 +23,29 @@
     from market_answer
     where ANSWER_ID = #{answerId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectList" parameterType="com.market.entity.MarketAnswer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_answer
+    <where>
+      <if test="surveyId != null and surveyId != ''">
+        and SURVEY_ID =  #{surveyId,jdbcType=INTEGER}
+      </if>
+      <if test="questionId != null and questionId != ''">
+        and QUESTION_ID =  #{questionId,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null and userId != ''">
+        and USER_ID =  #{userId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from market_answer
     where ANSWER_ID = #{answerId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.market.entity.MarketAnswer">
     insert into market_answer (ANSWER_ID, SURVEY_ID, ANSWER_CONTENT
       )

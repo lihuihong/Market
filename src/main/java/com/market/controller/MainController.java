@@ -5,20 +5,27 @@ import com.market.entity.Role;
 import com.market.entity.User;
 import com.market.services.FunServiceImpl;
 import com.market.services.RoleServiceImpl;
+import com.market.utils.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
-
 
 	@Autowired
 	private RoleServiceImpl roleServiceImp;
@@ -61,6 +68,15 @@ public class MainController {
 		return model + "/" + fun + "/" + file;
 	}
 
+	// 验证码
+	@RequestMapping("/check")
+	@ResponseBody
+	public void check(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+		Check check = new Check();
+		String random = check.check(120,37,resp);
+		req.getSession().setAttribute("userCode", random);
+	}
 
 
 	/**

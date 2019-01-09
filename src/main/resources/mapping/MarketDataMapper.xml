@@ -20,6 +20,12 @@
     from market_data
     where DATA_ID = #{dataId,jdbcType=INTEGER}
   </select>
+  <select id="selectByVehicleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_data
+    where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </select>
 
   <select id="selectList" parameterType="com.market.entity.MarketData" resultMap="BaseResultMap">
     select

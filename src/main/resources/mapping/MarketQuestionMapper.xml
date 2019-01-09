@@ -22,6 +22,12 @@
     from market_question
     where QUESTION_ID = #{questionId,jdbcType=INTEGER}
   </select>
+  <select id="findBySurveyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_question
+    where SURVEY_ID = #{surveyId,jdbcType=INTEGER}
+  </select>
   <select id="selectList" parameterType="com.market.entity.MarketVehicle" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

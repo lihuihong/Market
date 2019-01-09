@@ -34,16 +34,24 @@ public class UserController {
     @ResponseBody
     public Result login(User user, HttpServletRequest request){
 
+        HttpSession session = request.getSession();
+        String userCode = (String) session.getAttribute("userCode");
+
         Result result = new Result();
-        User resultUser = userService.login(user);
-        if(resultUser==null){
-            result.setError("用户名或密码错误！");
+        String code = request.getParameter("code");
+        if(code.toUpperCase().equals(userCode.toUpperCase())){
+            User resultUser = userService.login(user);
+            if(resultUser==null){
+                result.setError("用户名或密码错误！");
+            }else{
+                result.setSuccess("登录成功！");
+                session.setAttribute("userInfo",resultUser);
+            }
         }else{
-            result.setSuccess("登录成功！");
-            HttpSession session=request.getSession();
-            session.setAttribute("userInfo",resultUser);
+            result.setError("验证码错误！");
         }
         return result;
+
     }
 
     /**
@@ -129,6 +137,28 @@ public class UserController {
     }
 
     /**
+     * 查询所有用户
+     * @param s_user
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/findAll")
+    @ResponseBody
+    public Result list(User s_user, HttpServletResponse response)throws Exception{
+
+
+        List<User> customerList = userService.list(s_user);
+
+        Result result = new Result();
+
+        result.setSuccess("获取成功");
+        result.setData(customerList);
+        result.setCount(customerList.size());
+
+        return result;
+    }
+
+    /**
      * 添加或修改用户
      * @param s_user
      * @param request
@@ -181,14 +211,11 @@ public class UserController {
         if(!(password.equals(password1))){
             result.setError("原密码不正确");
         }else{
-
             password = request.getParameter("password3");
             resultUser.setPassword(password);
-
             userService.update(resultUser);
-
+            result.setSuccess("成功");
         }
-
 
         return result;
 

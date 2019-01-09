@@ -27,6 +27,16 @@ public class QuestionService {
     }
 
     /**
+     * 根据id查询问询
+     *
+     * @param id
+     * @return
+     */
+    public List<MarketQuestion> findBySurveyId(int id) {
+        return marketQuestionMapper.findBySurveyId(id);
+    }
+
+    /**
      * 查询所有题目
      *
      * @param marketQuestion

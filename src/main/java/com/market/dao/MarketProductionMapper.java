@@ -2,6 +2,8 @@ package com.market.dao;
 
 import com.market.entity.MarketProduction;
 
+import java.util.List;
+
 public interface MarketProductionMapper {
     int deleteByPrimaryKey(Integer productionId);
 
@@ -10,6 +12,8 @@ public interface MarketProductionMapper {
     int insertSelective(MarketProduction record);
 
     MarketProduction selectByPrimaryKey(Integer productionId);
+
+    List<MarketProduction> selectList(MarketProduction marketProduction);
 
     int updateByPrimaryKeySelective(MarketProduction record);
 

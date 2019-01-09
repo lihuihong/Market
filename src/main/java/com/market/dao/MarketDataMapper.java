@@ -13,6 +13,8 @@ public interface MarketDataMapper {
 
     MarketData selectByPrimaryKey(Integer dataId);
 
+    MarketData selectByVehicleId(Integer vehicleId);
+
     List<MarketData> selectList(MarketData marketData);
 
     int updateByPrimaryKeySelective(MarketData record);

@@ -2,11 +2,11 @@ package com.market.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import com.market.entity.MarketAnswer;
 import com.market.entity.MarketQuestion;
-import com.market.entity.MarketSurvey;
 import com.market.entity.Result;
+import com.market.services.AnswerService;
 import com.market.services.QuestionService;
-import com.market.services.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +16,11 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/question")
-public class QuestionController {
+@RequestMapping(value = "/answer")
+public class AnswerController {
 
 	@Autowired
-	private QuestionService questionService;
+	private AnswerService answerService;
 
 	/**
 	 * 单纯的页面跳转
@@ -30,11 +30,11 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public Result page(Integer page, Integer limit,MarketQuestion marketQuestion) {
+	public Result page(Integer page, Integer limit, MarketAnswer marketAnswer) {
 
 		Page pageBean = new Page(page,limit);
-		List<MarketQuestion> questions= questionService.selectList(marketQuestion);
-		PageInfo<MarketQuestion> pageInfo = new PageInfo<>(questions);
+		List<MarketAnswer> answers= answerService.selectList(marketAnswer);
+		PageInfo<MarketAnswer> pageInfo = new PageInfo<>(answers);
 
 		Result result = new Result();
 		result.setSuccess("成功");
@@ -51,38 +51,17 @@ public class QuestionController {
 	 *            页面名称，即jsp文件名
 	 * @return
 	 */
-	@RequestMapping(value = "/findBySurveyId")
-	@ResponseBody
-	public Result findBySurveyId(Integer surveyId) {
-
-		List<MarketQuestion> questions= questionService.findBySurveyId(surveyId);
-
-		Result result = new Result();
-		result.setSuccess("成功");
-		result.setData(questions);
-		result.setCount(questions.size());
-
-		return result;
-	}
-
-
-	/**
-	 * 单纯的页面跳转
-	 *
-	 *            页面名称，即jsp文件名
-	 * @return
-	 */
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Result save(MarketQuestion marketQuestio) {
+	public Result save(MarketAnswer marketAnswer) {
 
-		if(marketQuestio.getQuestionId() == null){
+		if(marketAnswer.getQuestionId() == null){
 
-			marketQuestio.setQuestionTime(new Date());
+			marketAnswer.setAnswerTime(new Date());
 
-			questionService.insertSelective(marketQuestio);
+			answerService.insertSelective(marketAnswer);
 		}else{
-			questionService.updateByPrimaryKeySelective(marketQuestio);
+			answerService.updateByPrimaryKeySelective(marketAnswer);
 		}
 
 		Result result = new Result();
@@ -100,7 +79,7 @@ public class QuestionController {
 	@ResponseBody
 	public Result del(Integer id) {
 
-		questionService.deleteByPrimaryKey(id);
+		answerService.deleteByPrimaryKey(id);
 
 		Result result = new Result();
 		result.setSuccess("成功");

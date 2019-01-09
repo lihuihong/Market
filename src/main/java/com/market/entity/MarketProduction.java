@@ -6,12 +6,14 @@ public class MarketProduction implements Serializable {
     private Integer productionId;
 
     private Integer vehicleId;
+    private Integer productionNumber;
+    private Integer productionVolume;
+    private Integer productionPrice;
+    private MarketVehicle vehicle;
 
-    private String productionNumber;
-
-    private String productionVolume;
 
     private static final long serialVersionUID = 1L;
+
 
     public Integer getProductionId() {
         return productionId;
@@ -29,34 +31,35 @@ public class MarketProduction implements Serializable {
         this.vehicleId = vehicleId;
     }
 
-    public String getProductionNumber() {
+    public Integer getProductionNumber() {
         return productionNumber;
     }
 
-    public void setProductionNumber(String productionNumber) {
-        this.productionNumber = productionNumber == null ? null : productionNumber.trim();
+    public void setProductionNumber(Integer productionNumber) {
+        this.productionNumber = productionNumber;
     }
 
-    public String getProductionVolume() {
+    public Integer getProductionVolume() {
         return productionVolume;
     }
 
-    public void setProductionVolume(String productionVolume) {
-        this.productionVolume = productionVolume == null ? null : productionVolume.trim();
+    public void setProductionVolume(Integer productionVolume) {
+        this.productionVolume = productionVolume;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", productionId=").append(productionId);
-        sb.append(", vehicleId=").append(vehicleId);
-        sb.append(", productionNumber=").append(productionNumber);
-        sb.append(", productionVolume=").append(productionVolume);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public Integer getProductionPrice() {
+        return productionPrice;
+    }
+
+    public void setProductionPrice(Integer productionPrice) {
+        this.productionPrice = productionPrice;
+    }
+
+    public MarketVehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(MarketVehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }

@@ -27,6 +27,16 @@ public class DataService {
     }
 
     /**
+     * 根据id查询问询
+     *
+     * @param id
+     * @return
+     */
+    public MarketData selectByVehicleId(int id) {
+        return marketDataMapper.selectByVehicleId(id);
+    }
+
+    /**
      * 查询所有问卷
      * @return
      */

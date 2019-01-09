@@ -76,7 +76,7 @@
 
 
         <div class="frameBtn">
-            <button class="layui-btn" lay-submit lay-filter="submit">确认添加</button>
+            <button class="layui-btn" lay-submit lay-filter="submit">确认修改</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </form>
@@ -174,7 +174,7 @@
                         //do something
                         if(data.code==0){
                             var index = parent.layer.getFrameIndex(window.name);//获取当前窗口索引
-                            parent.layer.msg('添加成功', {icon : 1});
+                            parent.layer.msg('修改成功', {icon : 1});
                             parent.layer.close(index);
                             parent.layui.table.reload('tableList');//重新加载父级tabel数据
                         } else {

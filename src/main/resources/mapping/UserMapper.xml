@@ -18,13 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from market_user where userName=#{userName} and password=#{password}
     </select>
 
-    <select id="list" parameterType="User" resultMap="UserResult">
+    <select id="selectByPrimaryKey" parameterType="User" resultMap="UserResult">
         select * from market_user
-         <where>
+        where id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="list" parameterType="java.lang.Integer" resultMap="UserResult">
+        select * from market_user
+        <where>
             <if test="userName!=null and userName!=''">
                 and userName like CONCAT('%',#{userName},'%')
             </if>
-         </where>
+        </where>
     </select>
 
     <select id="getTotal" parameterType="Map" resultType="Long">

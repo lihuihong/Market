@@ -120,7 +120,7 @@ layui.use(['element','layer'],function(){
 			btnAlign: 'c',
 			anim: 0,
 			shade: [0.5, 'rgb(0,0,0)'],
-			content: '/admin/page/personal/personalEdit',
+			content: '/page/systemManager/personalEdit',
 			zIndex: layer.zIndex, //重点1
 			success: function(layero){
 				//layer.setTop(layero); //顶置窗口
@@ -141,7 +141,7 @@ layui.use(['element','layer'],function(){
 			btnAlign: 'c',
 			anim: 0,
 			shade: [0.5, 'rgb(0,0,0)'],
-			content: '/admin/page/personal/personalPassword',
+			content: '/page/systemManager/personalPassword',
 			zIndex: layer.zIndex, //重点1
 			success: function(layero){
 				//layer.setTop(layero); //顶置窗口

@@ -1,13 +1,12 @@
 package com.market.dao;
 
+import com.market.entity.MarketQuestion;
 import com.market.entity.User;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author 冯健芸
- * @create 2018-01-02 13:18
  */
 
 /**
@@ -21,6 +20,13 @@ public interface UserDao {
      * @return
      */
     public User login(User user);
+
+    /**
+     * 根据用户id查询
+     * @param userId
+     * @return
+     */
+    User selectByPrimaryKey(Integer userId);
 
 
     /**

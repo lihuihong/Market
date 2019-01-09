@@ -103,7 +103,11 @@ layui.use(['form'], function(){
 					if(($.inArray(d,funarr))!=-1){
                         str += '<span class="funList"><input type="checkbox" name="funs" checked value="'+data.data[i].id+'" title="'+data.data[i].name+'" /></span>';
                     } else {
-                        str += '<span class="funList"><input type="checkbox" name="funs" value="'+data.data[i].id+'" title="'+data.data[i].name+'" /></span>';
+						if(data.data[i].pid == 0){
+							str += '<p style="padding: 9px 0px;">'+data.data[i].name+'</p>'
+						}else {
+							str += '<span class="funList"><input type="checkbox" name="funs" value="' + data.data[i].id + '" title="' + data.data[i].name + '" /></span>';
+						}
                     }
                 }
                 $('.funn').html(str);

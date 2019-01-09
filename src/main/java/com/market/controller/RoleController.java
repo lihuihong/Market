@@ -3,6 +3,7 @@ package com.market.controller;
 import com.market.entity.Fun;
 import com.market.entity.Result;
 import com.market.entity.Role;
+import com.market.entity.User;
 import com.market.services.FunServiceImpl;
 import com.market.services.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,6 +48,44 @@ public class RoleController {
         }else{
             result.setSuccess("获取失败");
             result.setCount(0);
+        }
+
+        return result;
+    }
+
+    /**
+     * 获取用户权限
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/findUserFun")
+    @ResponseBody
+    public Result save(HttpServletRequest request, HttpServletResponse response)throws Exception{
+
+        User user = (User) request.getSession().getAttribute("userInfo");
+
+        Role role  = roleService.findById(user.getRoleId());
+        String[] roleFuns = role.getFuns().split(",");
+
+        List<String> list = new ArrayList<>();
+
+        List<Fun> funs  = funService.list();
+
+        for(String rolf : roleFuns){
+
+            for(Fun fun : funs){
+                if(Integer.parseInt(rolf) == fun.getId()){
+                    list.add(fun.getName());
+                }
+            }
+        }
+        Result result = new Result();
+        if(role != null){
+            result.setSuccess("成功");
+            result.setData(list);
+        }else{
+            result.setError("失败");
         }
 
         return result;

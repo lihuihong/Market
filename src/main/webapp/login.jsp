@@ -44,7 +44,7 @@
                                 <div class="layui-input-inline code">
                                     <input type="text" name="code" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
                                 </div>
-                                <div class="layui-form-mid"><img src="/admin/check" id="iCodeImage" alt="验证码" title="点击更换" /></div>
+                                <div class="layui-form-mid"><img src="/check" id="iCodeImage" alt="验证码" title="点击更换" /></div>
                             </div>
                             <div class="tips"></div>
                         </div>
@@ -119,7 +119,7 @@
             return false;
         });
         $('#iCodeImage').on('click',function(){
-            $(this).attr('src','/admin/check?' + Math.random());
+            $(this).attr('src','/check?' + Math.random());
         });
     });
 </script>

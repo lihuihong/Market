@@ -14,6 +14,8 @@ public interface MarketConfigureMapper {
 
     MarketConfigure selectByPrimaryKey(Integer configureId);
 
+    MarketConfigure selectByVehicleId(Integer vehicleId);
+
     List<MarketConfigure> selectList(MarketConfigure marketConfigure);
 
     int updateByPrimaryKeySelective(MarketConfigure record);

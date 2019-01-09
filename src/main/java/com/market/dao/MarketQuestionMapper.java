@@ -13,6 +13,8 @@ public interface MarketQuestionMapper {
 
     MarketQuestion selectByPrimaryKey(Integer questionId);
 
+    List<MarketQuestion> findBySurveyId(Integer surveyId);
+
     List<MarketQuestion> selectList(MarketQuestion marketQuestion);
 
     int updateByPrimaryKeySelective(MarketQuestion record);

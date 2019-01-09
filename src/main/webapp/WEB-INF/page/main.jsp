@@ -31,11 +31,11 @@
 					<div class="layui-nav">
 						<div class="layui-nav-item">
 							<a href="javascript:;">
-								<%--<cite>${admin.user}</cite>--%>
+								<cite>${admin.userName}</cite>
 							</a>
 							<dl class="layui-nav-child">
-								<dd><a id="personalEdit" lay-href="personal/personalEdit.html">个人资料</a></dd>
-								<dd><a id="personalPassword" lay-href="personal/personalPassword.html">修改密码</a></dd>
+								<dd><a id="personalEdit">个人资料</a></dd>
+								<dd><a id="personalPassword">修改密码</a></dd>
 							</dl>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 			</div>
 			<ul class="layui-nav layui-nav-tree" lay-filter="nav">
 				<li data-name="home" class="layui-nav-item layui-this">
-					<a href="javascript:;" lay-href="/admin/page/home/index" class="nav-tab" lay-id="home" data-type="tabChange" lay-tips="控制台">
+					<a href="javascript:;" lay-href="/page/index" class="nav-tab" lay-id="home" data-type="tabChange" lay-tips="控制台">
 						<i class="layui-icon layui-icon-theme"></i><label>控制台</label>
 					</a>
 				</li>
@@ -83,7 +83,7 @@
 			</ul>
 			<div class="layui-tab-content">
 				<div class="layui-tab-item layui-show">
-					<iframe src="/admin/page/home/index" frameborder="0" name="tabFrame" class="tabFrame"></iframe>
+					<iframe src="/page/index" frameborder="0" name="tabFrame" class="tabFrame"></iframe>
 				</div>
 			</div>
 		</div>

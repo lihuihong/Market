@@ -28,6 +28,12 @@
     from market_configure
     where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}
   </select>
+  <select id="selectByVehicleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market_configure
+    where VEHICLE_ID = #{vehicleId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from market_configure
     where CONFIGURE_ID = #{configureId,jdbcType=INTEGER}

@@ -26,6 +26,16 @@ public class ConfigService {
     }
 
     /**
+     * 根据id查询问询
+     *
+     * @param id
+     * @return
+     */
+    public MarketConfigure selectByVehicleId(int id) {
+        return marketConfigureMapper.selectByVehicleId(id);
+    }
+
+    /**
      * 查询所有问卷
      * @return
      */
